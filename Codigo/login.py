@@ -6,7 +6,7 @@ from connection import connection
 class Login:
     def __init__(self):#crear ventana
         self.ventana = tk.Tk()#define la ventana
-        self.ventana.title("Login - MedicalBase")#titulo de la ventana
+        self.ventana.title("Login - Medication Registration System")#titulo de la ventana
         self.ventana.geometry("300x200")#dimeciones de la ventana
 
         # UI
