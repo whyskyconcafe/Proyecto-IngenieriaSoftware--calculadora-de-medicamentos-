@@ -88,5 +88,4 @@ class Login:
         except Exception as e:
             messagebox.showerror("Error", f"Ocurrió un error: {e}")
 
-if __name__ == "__main__":
-    Login()
+

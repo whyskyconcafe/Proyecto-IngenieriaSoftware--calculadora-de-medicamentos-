@@ -1,31 +1,59 @@
-# menu_principal.py
 import tkinter as tk
+from tkinter import messagebox
+from pacientes import AppPrincipal  # Módulo de pacientes
+from medicamentos import MedicamentosApp  # <-- Agregado
+from calculator import CalculadoraMedicamentos  # ← Nueva importación
 
-# Paleta
+
+# Paleta de colores
 BG = '#041955'
 FWG = '#97b4ff'
 FG = '#3450a1'
 
 class MenuPrincipal:
     def __init__(self):
-        root = tk.Tk()
-        root.title("Menú Principal")
-        root.geometry("600x400")
-        root.configure(bg=BG)
+        self.root = tk.Tk()
+        self.root.title("Menú Principal")
+        self.root.geometry("600x400")
+        self.root.configure(bg=BG)
 
-        header = tk.Label(root, text="Menú principal", bg=FWG, fg=FG,
-                          font=("Helvetica", 16, "bold"), height=2)
+        # Encabezado
+        header = tk.Label(self.root, text="Menú principal", bg=FWG, fg=FG,
+                          font=("Arial", 16, "bold"), height=2)
         header.pack(fill='x', pady=(0, 40))
 
-        def create_rounded_button(master, text):
-            btn = tk.Canvas(master, width=250, height=60, bg=BG, highlightthickness=0)
-            btn.create_oval(0, 0, 250, 60, fill=FWG, outline=FG, width=3)
-            btn.create_text(125, 30, text=text, font=("Helvetica", 12, "bold"), fill=FG)
-            btn.pack(pady=10)
-            return btn
+        # Botones con lógica
+        self.crear_boton("Calculadora de medicamentos", self.abrir_calculadora)
+        self.crear_boton("Pacientes", self.abrir_pacientes)
+        self.crear_boton("Medicamentos", self.abrir_medicamentos)
 
-        create_rounded_button(root, "Calculadora de medicamentos")
-        create_rounded_button(root, "Pacientes")
-        create_rounded_button(root, "Medicamentos")
+        self.root.mainloop()
 
-        root.mainloop()
+    def crear_boton(self, texto, comando):
+        btn = tk.Button(
+            self.root,
+            text=texto,
+            bg=FWG,
+            fg=FG,
+            font=("Arial", 12, "bold"),
+            relief="solid",
+            bd=2,
+            activebackground="#cfe0ff",
+            activeforeground=FG,
+            command=comando
+        )
+        btn.pack(pady=10, ipadx=40, ipady=10)
+
+    def abrir_calculadora(self):
+        ventana_calc = tk.Toplevel(self.root)
+        CalculadoraMedicamentos(ventana_calc)  
+
+    def abrir_pacientes(self):
+        ventana_pacientes = tk.Toplevel(self.root)
+        AppPrincipal(ventana_pacientes)
+
+    def abrir_medicamentos(self):
+        ventana_medicamentos = tk.Toplevel(self.root)
+        MedicamentosApp(ventana_medicamentos)  # <-- Aquí se lanza el módulo real
+
+
