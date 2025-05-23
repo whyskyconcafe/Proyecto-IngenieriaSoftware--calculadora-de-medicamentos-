@@ -1,20 +1,16 @@
 import tkinter as tk
 from tkinter import messagebox
-from pacientes import AppPrincipal  # Módulo de pacientes
-from medicamentos import MedicamentosApp  # <-- Agregado
-from calculator import CalculadoraMedicamentos  # ← Nueva importación
-
-
-# Paleta de colores
-BG = '#041955'
-FWG = '#97b4ff'
-FG = '#3450a1'
+from pacientes import AppPrincipal 
+from medicamentos import MedicamentosApp  
+from calculator import CalculadoraMedicamentos 
+from usuario import RegistroUsuario
+from styles import * 
 
 class MenuPrincipal:
     def __init__(self):
         self.root = tk.Tk()
         self.root.title("Menú Principal")
-        self.root.geometry("600x400")
+        self.root.geometry("1000x900")
         self.root.configure(bg=BG)
 
         # Encabezado
@@ -26,6 +22,8 @@ class MenuPrincipal:
         self.crear_boton("Calculadora de medicamentos", self.abrir_calculadora)
         self.crear_boton("Pacientes", self.abrir_pacientes)
         self.crear_boton("Medicamentos", self.abrir_medicamentos)
+        self.crear_boton("Registrar Usuario", self.registrar_usuario)  # ← nuevo
+        self.crear_boton("Salir", self.salir)  # ← nuevo
 
         self.root.mainloop()
 
@@ -54,6 +52,12 @@ class MenuPrincipal:
 
     def abrir_medicamentos(self):
         ventana_medicamentos = tk.Toplevel(self.root)
-        MedicamentosApp(ventana_medicamentos)  # <-- Aquí se lanza el módulo real
+        MedicamentosApp(ventana_medicamentos)
+
+    def registrar_usuario(self):
+        ventana_registro = tk.Toplevel(self.root)
+        RegistroUsuario(ventana_registro)
 
 
+    def salir(self):
+        self.root.destroy()

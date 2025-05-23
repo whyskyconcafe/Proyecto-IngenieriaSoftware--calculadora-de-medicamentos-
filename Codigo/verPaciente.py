@@ -80,7 +80,3 @@ class VerPaciente(tk.Toplevel):
         self.info_text.insert(tk.END, datos)
         self.info_text.config(state=tk.DISABLED)
 
-#if __name__ == "__main__":
- #   root = tk.Tk()
-  #  app = VerPaciente(root)
-   # root.mainloop()
